@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Weather Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='static.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+
+    <div class="sidebar">
+
+        <h2>🌍 Disaster System</h2>
+
+        <a href="/">🏠 Dashboard</a>
+
+        <a href="/report">📝 Report Incident</a>
+
+        <a href="/weather">🌦 Weather Alerts</a>
+
+    </div>
+
+    <!-- Main Content -->
+
+    <div class="main-content">
+
+        <div class="card">
+
+            <h2>🌦 Live Weather Information</h2>
+
+            <p><strong>Weather:</strong> {{ weather }}</p>
+
+            <p><strong>Temperature:</strong> {{ temp }} °C</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

@@ -5,6 +5,7 @@ import json
 import requests
 import os
 from dotenv import load_dotenv
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 load_dotenv()
@@ -95,13 +96,82 @@ def home():
 
     except:
         print("Weather API Error")
-    # Convert map to HTML
+        # Convert map to HTML
     map_html = disaster_map._repr_html_()
 
     return render_template(
         'index.html',
-        map_html=map_html
-    )
+        map_html=map_html,
 
+        hospital_count=len(data['hospitals']),
+        shelter_count=len(data['shelters']),
+        safezone_count=len(data['safe_zones'])
+    )
+@app.route('/weather')
+
+def weather_dashboard():
+
+    api_key = "46c5c3a3a33bc057aedfa4e44a2cb8ae"
+
+    weather_url = f"https://api.openweathermap.org/data/2.5/weather?q=Tirupati&appid={api_key}"
+
+    response = requests.get(weather_url)
+
+    weather_data = response.json()
+
+    weather = weather_data['weather'][0]['description']
+
+    temp = weather_data['main']['temp'] - 273.15
+
+    return render_template(
+        'weather.html',
+        weather=weather,
+        temp=f"{temp:.1f}"
+    )
+@app.route('/incidents')
+
+def incidents():
+
+    try:
+
+        with open('reports/incidents.txt', 'r') as file:
+
+            reports = file.read()
+
+    except:
+
+        reports = "No incident reports available."
+
+    return render_template(
+        'incidents.html',
+        reports=reports
+    )
+@app.route('/analytics')
+
+def analytics():
+
+    return render_template(
+
+        'analytics.html',
+
+        hospital_count=len(data['hospitals']),
+
+        shelter_count=len(data['shelters']),
+
+        safezone_count=len(data['safe_zones'])
+
+    )
+@app.route('/emergency')
+
+def emergency():
+
+    return render_template('emergency.html')
+@app.route('/report', methods=['GET', 'POST'])
+
+@app.route('/safezones')
+
+def safezones():
+
+    return render_template('safezones.html')
 if __name__ == '__main__':
     app.run(debug=True)

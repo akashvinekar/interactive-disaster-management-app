@@ -3,187 +3,85 @@
 
 <head>
 
-    <title>Interactive Disaster Management Map</title>
+    <title>Disaster Management Dashboard</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial;
-            background: #0d1b2a;
-            color: white;
-        }
-
-        h1 {
-            text-align: center;
-            background: #1b263b;
-            padding: 15px;
-            margin: 0;
-        }
-
-        .map-container {
-            width: 100%;
-            height: 90vh;
-        }
-
-        .alert {
-            background: #c1121f;
-            padding: 15px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .info-panel {
-            background: #1b263b;
-            padding: 20px;
-            margin: 15px;
-            border-radius: 10px;
-        }
-
-        .info-panel h2 {
-            margin-top: 0;
-        }
-
-        .info-panel ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .info-panel li {
-            padding: 8px;
-            font-size: 18px;
-        }
-
-        footer {
-            background: #1b263b;
-            text-align: center;
-            padding: 15px;
-            font-size: 16px;
-        }
-        .location-btn{
-    background:#00b4d8;
-    color:white;
-    border:none;
-    padding:12px 20px;
-    font-size:18px;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-.location-btn:hover{
-    background:#0077b6;
-}
-.emergency-buttons{
-    margin-top:20px;
-}
-
-.emergency-btn{
-    background:#d90429;
-    color:white;
-    border:none;
-    padding:12px 18px;
-    margin:5px;
-    border-radius:8px;
-    font-size:16px;
-    cursor:pointer;
-}
-
-.emergency-btn:hover{
-    background:#9d0208;
-}
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='static.css') }}">
 
 </head>
 
 <body>
 
-    <h1>Interactive Disaster Management Map</h1>
-    <div style="text-align:center; padding:10px;">
+<div class="dashboard">
 
-    <button onclick="getLocation()" class="location-btn">
-        📍 Show My Location
+    <!-- Sidebar -->
+
+    <div class="sidebar">
+
+        <h2>🌍 Disaster System</h2>
+
+        <a href="/">🏠 Dashboard</a>
+
+        <a href="/analytics">📈 Analytics</a>
+
+        <a href="/emergency">🚑 Emergency Services</a>
+
+        <a href="/safezones">🛡 Safe Zones</a>
+
+    </div>
+
+    <!-- Main Content -->
+
+    <div class="main-content">
+
+        <div class="card">
+
+            <h3>⚠ Disaster Alert</h3>
+
+            <p>
+                Heavy rainfall warning in Tirupati region.
+                Stay near emergency shelters.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>📊 System Status</h3>
+
+            <p>Hospitals Active: {{ hospital_count }}</p>
+
+<p>Shelters Active: {{ shelter_count }}</p>
+
+<p>Safe Zones Available: {{ safezone_count }}</p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🗺 Live Disaster Map</h3>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=13.6400,79.4250"
+   target="_blank">
+
+    <button class="nav-btn">
+
+        🧭 Navigate to Shelter
+
     </button>
 
-</div>
-    <div class="alert">
+</a>
 
-        ⚠ Flood Warning: Heavy rainfall expected in affected areas.
-        Stay near emergency shelters and safe zones.
+            <div class="map-container">
+
+                {{ map_html|safe }}
+
+            </div>
+
+        </div>
 
     </div>
-    <div class="info-panel">
-
-        <h2>Emergency Information</h2>
-
-        <ul>
-            <li>🚑 Hospitals Available</li>
-            <li>🏠 Relief Shelters Active</li>
-            <li>🛡 Safe Zones Marked</li>
-            <li>🌧 Flood Monitoring Enabled</li>
-        </ul>
-        <div class="emergency-buttons">
-
-    <a href="tel:108">
-        <button class="emergency-btn">
-            🚑 Ambulance
-        </button>
-    </a>
-
-    <a href="tel:100">
-        <button class="emergency-btn">
-            👮 Police
-        </button>
-    </a>
-
-    <a href="tel:101">
-        <button class="emergency-btn">
-            🔥 Fire Service
-        </button>
-    </a>
 
 </div>
 
-    </div>
-    <div class="map-container">
-
-        {{ map_html|safe }}
-
-    </div>
-    <footer>
-
-        Developed using Python, Flask and Folium |
-        Interactive Disaster Management System
-
-    </footer>
-<script>
-
-function getLocation() {
-
-    if (navigator.geolocation) {
-
-        navigator.geolocation.getCurrentPosition(showPosition);
-
-    } else {
-
-        alert("Geolocation is not supported by this browser.");
-
-    }
-}
-
-function showPosition(position) {
-
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-
-    alert(
-        "Your Location:\nLatitude: "
-        + latitude +
-        "\nLongitude: "
-        + longitude
-    );
-}
-
-</script>
 </body>
 
 </html>
