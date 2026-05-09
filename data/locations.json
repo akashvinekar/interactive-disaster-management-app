@@ -1,0 +1,49 @@
+{
+  "hospitals": [
+
+    {
+      "name": "SVIMS Hospital",
+      "lat": 13.6288,
+      "lon": 79.4192
+    },
+
+    {
+      "name": "Ruia Hospital",
+      "lat": 13.6350,
+      "lon": 79.4200
+    }
+
+  ],
+
+  "shelters": [
+
+    {
+      "name": "Tirupati Relief Shelter",
+      "lat": 13.6400,
+      "lon": 79.4250
+    },
+
+    {
+      "name": "Emergency Camp",
+      "lat": 13.6500,
+      "lon": 79.4300
+    }
+
+  ],
+
+  "safe_zones": [
+
+    {
+      "name": "Safe Zone A",
+      "lat": 13.6200,
+      "lon": 79.4100
+    },
+
+    {
+      "name": "Safe Zone B",
+      "lat": 13.6600,
+      "lon": 79.4400
+    }
+
+  ]
+}
